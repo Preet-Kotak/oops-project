@@ -1,4 +1,4 @@
-import { Home, Building2, Bed, Users, LogOut, User } from "lucide-react";
+import { Home, Building2, Bed, Users, LogOut, User, Bell, FileText, FileCheck, Utensils, CheckSquare, BarChart3 } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -9,6 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarFooter,
+  SidebarHeader,
 } from "@/components/ui/sidebar";
 import { useLocation } from "wouter";
 
@@ -22,23 +23,39 @@ export function AppSidebar({ role }: AppSidebarProps) {
   const studentItems = [
     { title: "Dashboard", url: "/student", icon: Home },
     { title: "Room Allotment", url: "/student/allotment", icon: Bed },
+    { title: "Room Swap", url: "/student/room-swap", icon: FileText },
+    { title: "Leave Application", url: "/student/leave", icon: FileCheck },
+    { title: "Mess Change", url: "/student/mess-change", icon: Utensils },
+    { title: "Notifications", url: "/student/notifications", icon: Bell },
   ];
 
   const wardenItems = [
     { title: "Dashboard", url: "/warden", icon: Home },
     { title: "Students", url: "/warden/students", icon: Users },
+    { title: "Approvals", url: "/warden/approvals", icon: CheckSquare },
+    { title: "Notifications", url: "/warden/notifications", icon: Bell },
   ];
 
   const adminItems = [
     { title: "Dashboard", url: "/admin", icon: Home },
-    { title: "Hostels", url: "/admin/hostels", icon: Building2 },
-    { title: "Rooms", url: "/admin/rooms", icon: Bed },
+    { title: "Hostel Management", url: "/admin/hostels", icon: Building2 },
+    { title: "Reports & Analytics", url: "/admin/reports", icon: BarChart3 },
+    { title: "Notifications", url: "/admin/notifications", icon: Bell },
   ];
 
   const items = role === "student" ? studentItems : role === "warden" ? wardenItems : adminItems;
 
   return (
     <Sidebar>
+      <SidebarHeader className="border-b px-4 py-3">
+        <div className="flex items-center gap-3">
+          <img src="/logo.png" alt="SVNIT Logo" className="h-10 w-10 object-contain" />
+          <div className="flex flex-col">
+            <span className="text-sm font-semibold">SVNIT</span>
+            <span className="text-xs text-muted-foreground">Hostel Management</span>
+          </div>
+        </div>
+      </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>
@@ -68,7 +85,7 @@ export function AppSidebar({ role }: AppSidebarProps) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild data-testid="link-profile">
-              <a href="#" onClick={(e) => { e.preventDefault(); console.log('Profile clicked'); }}>
+              <a href={`/${role}/profile`} onClick={(e) => { e.preventDefault(); setLocation(`/${role}/profile`); }}>
                 <User />
                 <span>Profile</span>
               </a>

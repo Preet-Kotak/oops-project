@@ -11,6 +11,15 @@ import StudentDashboard from "@/pages/StudentDashboard";
 import AdminDashboard from "@/pages/AdminDashboard";
 import WardenDashboard from "@/pages/WardenDashboard";
 import RoomAllotment from "@/pages/RoomAllotment";
+import Profile from "@/pages/Profile";
+import Notifications from "@/pages/Notifications";
+import RoomSwapRequest from "@/pages/RoomSwapRequest";
+import LeaveApplication from "@/pages/LeaveApplication";
+import MessChangeRequest from "@/pages/MessChangeRequest";
+import ApprovalsManagement from "@/pages/ApprovalsManagement";
+import StudentManagement from "@/pages/StudentManagement";
+import HostelManagement from "@/pages/HostelManagement";
+import Reports from "@/pages/Reports";
 import NotFound from "@/pages/not-found";
 
 function DashboardLayout({ role }: { role: "student" | "warden" | "admin" }) {
@@ -24,13 +33,43 @@ function DashboardLayout({ role }: { role: "student" | "warden" | "admin" }) {
   if (role === "student") {
     if (location === "/student/allotment") {
       content = <RoomAllotment />;
+    } else if (location === "/student/room-swap") {
+      content = <RoomSwapRequest />;
+    } else if (location === "/student/leave") {
+      content = <LeaveApplication />;
+    } else if (location === "/student/mess-change") {
+      content = <MessChangeRequest />;
+    } else if (location === "/student/notifications") {
+      content = <Notifications />;
+    } else if (location === "/student/profile") {
+      content = <Profile />;
     } else {
       content = <StudentDashboard />;
     }
+  } else if (role === "warden") {
+    if (location === "/warden/students") {
+      content = <StudentManagement />;
+    } else if (location === "/warden/approvals") {
+      content = <ApprovalsManagement />;
+    } else if (location === "/warden/notifications") {
+      content = <Notifications />;
+    } else if (location === "/warden/profile") {
+      content = <Profile />;
+    } else {
+      content = <WardenDashboard />;
+    }
   } else if (role === "admin") {
-    content = <AdminDashboard />;
-  } else {
-    content = <WardenDashboard />;
+    if (location === "/admin/hostels") {
+      content = <HostelManagement />;
+    } else if (location === "/admin/reports") {
+      content = <Reports />;
+    } else if (location === "/admin/notifications") {
+      content = <Notifications />;
+    } else if (location === "/admin/profile") {
+      content = <Profile />;
+    } else {
+      content = <AdminDashboard />;
+    }
   }
 
   return (
@@ -58,18 +97,27 @@ export default function App() {
         <Toaster />
         <Switch>
           <Route path="/" component={Login} />
-          <Route path="/student">
-            <DashboardLayout role="student" />
-          </Route>
-          <Route path="/student/allotment">
-            <DashboardLayout role="student" />
-          </Route>
-          <Route path="/admin">
-            <DashboardLayout role="admin" />
-          </Route>
-          <Route path="/warden">
-            <DashboardLayout role="warden" />
-          </Route>
+          
+          <Route path="/student"><DashboardLayout role="student" /></Route>
+          <Route path="/student/allotment"><DashboardLayout role="student" /></Route>
+          <Route path="/student/room-swap"><DashboardLayout role="student" /></Route>
+          <Route path="/student/leave"><DashboardLayout role="student" /></Route>
+          <Route path="/student/mess-change"><DashboardLayout role="student" /></Route>
+          <Route path="/student/notifications"><DashboardLayout role="student" /></Route>
+          <Route path="/student/profile"><DashboardLayout role="student" /></Route>
+          
+          <Route path="/warden"><DashboardLayout role="warden" /></Route>
+          <Route path="/warden/students"><DashboardLayout role="warden" /></Route>
+          <Route path="/warden/approvals"><DashboardLayout role="warden" /></Route>
+          <Route path="/warden/notifications"><DashboardLayout role="warden" /></Route>
+          <Route path="/warden/profile"><DashboardLayout role="warden" /></Route>
+          
+          <Route path="/admin"><DashboardLayout role="admin" /></Route>
+          <Route path="/admin/hostels"><DashboardLayout role="admin" /></Route>
+          <Route path="/admin/reports"><DashboardLayout role="admin" /></Route>
+          <Route path="/admin/notifications"><DashboardLayout role="admin" /></Route>
+          <Route path="/admin/profile"><DashboardLayout role="admin" /></Route>
+          
           <Route component={NotFound} />
         </Switch>
       </TooltipProvider>

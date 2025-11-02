@@ -35,13 +35,16 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-primary/10 p-4">
-      <Card className="w-full max-w-md">
+    <div 
+      className="min-h-screen flex items-center justify-center p-4 relative bg-cover bg-center"
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/hostel-bg.jpg)`,
+      }}
+    >
+      <Card className="w-full max-w-md shadow-2xl backdrop-blur-sm bg-card/95">
         <CardHeader className="space-y-4 text-center">
           <div className="flex justify-center">
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-              <Building2 className="w-8 h-8 text-primary" />
-            </div>
+            <img src="/logo.png" alt="SVNIT Logo" className="h-20 w-20 object-contain" />
           </div>
           <div>
             <CardTitle className="text-2xl">SVNIT Hostel Portal</CardTitle>
